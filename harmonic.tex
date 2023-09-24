@@ -1,0 +1,154 @@
+\documentclass[b5paper]{book}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb}
+\usepackage[russian]{babel}
+\usepackage{opensans}
+\usepackage[most]{tcolorbox}
+\usepackage{titlesec}
+\usepackage{indentfirst}
+
+\titleformat{\subsection}
+  {\normalfont\fontsize{10}{15}\bfseries}{\thesection}{1em}{}
+
+\usepackage{mathtools}
+\DeclarePairedDelimiter\bra{\langle}{\rvert}
+\DeclarePairedDelimiter\ket{\lvert}{\rangle}
+\DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{#1 \delimsize\vert #2}
+
+\binoppenalty=10000
+\relpenalty=10000
+
+\definecolor{mathadd-bg}{RGB}{255, 241, 224}
+% \definecolor{mathadd-bg}{RGB}{255, 232, 224}
+\definecolor{mathadd-fg}{RGB}{173, 54, 33}
+\newtcolorbox{mathadd}[2][]{%
+    colback=mathadd-bg,
+    grow to right by=-0.5mm,
+    grow to left by=-0.50mm,
+    boxrule=0pt,
+    boxsep=0pt,
+    breakable,
+    enhanced jigsaw,
+    borderline west={4pt}{0pt}{mathadd-fg},
+%     title={#2\par},
+    colbacktitle={mathadd-bg},
+    coltitle={black},
+    fonttitle={\large\bfseries},
+    attach title to upper={},
+    before upper={\parindent4pt},
+    #1,
+}
+
+\begin{document}
+
+\section* {Одномерный гармонический осциллятор}
+
+Рассмотрим одномерную механическую систему с классическим гамильтонианом
+$$H(p, x) = \frac {p^2} {2m} + U(x).$$
+в окрестности точки устойчивого равновесия $x = 0.$ Будем считать, что потенциальную энергию можно разложить в окрестности этой точки как
+$$U(x) \approx U(0) + \frac 1 2 U''(0) x^2.$$
+Предположив, что величина $U''(0)$ положительна, обозначим частоту малых колебаний как $\omega = \sqrt {\frac {U''(0)} {m} },$ в результате чего гамильтониан запишется в виде
+$$H(p, x) = \frac {p^2} {2m} + \frac {m\omega^2} {2} x^2 + U(0).$$
+
+Выбрав начало отсчета потенциальной энергии таким образом, что $U(0) = 0$ и проквантовав систему,
+получим следующий квантовомеханический гамильтониан:
+\begin{equation}\label{osc-hamiltonian}
+ \hat H = \frac {\hat p^2} {2m} + \frac {m\omega^2} {2} \hat x^2.
+\end{equation}
+
+Найдем его уровни энергии и собственные функции. Переходить в координатное представление и непосредственно решать уравнение Шрёдингера достаточно сложно, для этого необходимо использовать метод Лапласа.
+
+\subsection*{Операторы рождения и уничтожения}
+
+Поступим другим путем. Начнем с того, что для удобства дальнейших вычислений выделим множитель $\hbar \omega$ в \eqref{osc-hamiltonian}:
+
+\begin{equation}\label{osc-hamiltonian-hw}
+ \hat H = \hbar \omega \left (\frac {\hat p^2} {2m\hbar\omega} + \frac {m\omega} {2\hbar} \hat x^2\right).
+\end{equation}
+
+Теперь попробуем <<факторизовать>> операторное выражение в скобках. Введем \textit{оператор уничтожения}
+$$\hat a_{-} = \sqrt{\frac{m\omega}{2\hbar}} \hat x + i \frac {\hat p} {\sqrt{2 m \hbar \omega}}$$
+и сопряженный ему \textit{оператор рождения}
+$$\hat a_{+} = (\hat a_{-})^\dagger =  \sqrt{\frac{m\omega}{2\hbar}} \hat x - i \frac {\hat p} {\sqrt{2 m \hbar \omega}}.$$
+Произведение $\hat a_{+} \hat a_{-}$ равно
+\begin{equation}\label{osc-a-minis-a-plus}
+ \hat a_{+} \hat a_{-} = \frac {\hat p^2} {2 m \hbar \omega} + \frac {m\omega} {2\hbar} \hat x^2 +
+\frac {i} {2\hbar} [\hat x, \hat p].
+\end{equation}
+Коммутатор $[\hat x, \hat p]$ равен $i \hbar,$ так что из \eqref{osc-a-minis-a-plus} следует, что
+\begin{equation}\label{osc-p-plus-x}
+\frac {\hat p^2} {2 m \hbar \omega} + \frac {m\omega} {2\hbar} \hat x^2 = \hat a_{+} \hat a_{-} +
+\frac {1} {2}.
+\end{equation}
+Подставляя \eqref{osc-p-plus-x} в \eqref{osc-hamiltonian-hw}, получаем
+\begin{equation}\label{osc-hamiltonian-a-plus-a-minis}
+ \hat H = \hbar \omega \left(\hat a_{+} \hat a_{-} + \frac {1} {2}\right).
+\end{equation}
+
+\subsubsection*{Основное состояние}
+
+Из выражения \eqref{osc-hamiltonian-a-plus-a-minis} видно, что энергия ограничена снизу величиной
+$\hbar \omega / 2$
+в силу того, что $\hat a_{+} = (\hat a_{-})^\dagger$ и следующего общего свойства:
+
+\begin{mathadd}{}
+    Любой оператор вида $\hat A^{\dagger} \hat A$ является неотрицательно определенным, так как
+    для всякого вектора $\ket{\psi}$
+    $$\bra{\psi} \hat A^{\dagger} \hat A \ket{\psi} = (A \ket{\psi})^{\dagger} (A \ket{\psi}) \geq 0.$$
+
+    Отсюда следует неотрицательность всех собственных значений такого оператора: если $\ket{\psi}$ -- нормированный собственный вектор $\hat A^{\dagger} \hat A$ с собственным значением $\lambda,$ то
+    $$\lambda = \bra{\psi} \lambda \ket{\psi} = \bra{\psi} \hat A^{\dagger} \hat A \ket{\psi} \geq 0.$$
+\end{mathadd}
+
+Покажем, что энергия основного состояния совпадает с минимально возможной энергией:
+$$E_0 = \frac {\hbar \omega} {2}.$$ Для этого найдем собственный вектор гамильтониана $\ket{0},$
+такой, что $\hat H \ket{0} = E_0 \ket{0}.$ Таким вектором является вектор, построенный как решение
+уравнения
+$$\hat a_{-} \ket {0} = 0.$$
+
+В координатном представлении это уравнение записывается как
+$$\left[\sqrt{\frac{m\omega}{2\hbar}} x + \frac{i}{\sqrt{2m \hbar \omega}}
+\left(-i \hbar \frac {d}{dx} \right)
+\right] \psi_0(x) = 0.$$
+Данное дифференциальное уравнение решается методом разделения переменных и имеет решение
+$$\psi_0(x) = C e^{-\frac{m\omega}{\hbar}\frac{x^2}{2}}.$$
+Эту функцию можно нормировать, вычислив гауссов интеграл
+$$\int \psi_0^*(x) \psi_0(x) dx = \int |C|^2 e^{-\frac{m\omega}{\hbar}\frac{x^2}{2}} dx=
+|C|^2 \sqrt{\frac{\pi \hbar}{m \omega}},$$
+откуда для волновой функции основного состояния получаем выражение
+\begin{equation}\label{osc-ground-state}
+ \psi_0(x) = \left(\frac{m\omega}{\pi \hbar}\right)^{\frac 1 4} e^{-\frac{m\omega}{\hbar} \frac{x^2}{2}}.
+\end{equation}
+
+Нормированность волновой функции доказывает, что найденный вектор $\ket{0}$ является физическим
+состоянием и энергия $E_0 = \hbar \omega / 2$ является низшим уровнем энергии.
+
+\subsubsection*{Повышение и понижение энергии}
+
+Пусть $\ket{E}$ -- состояние с энергией $E:$
+$$\hat H \ket{E} = E \ket{E}.$$
+Вычислим коммутатор операторов уничтожения и рождения:
+$$[\hat a_{-}, \hat a_{+}] = \hat a_{-} \hat a_{+} - \hat a_{+} \hat a_{-} = \frac {i} {\hbar} [\hat p, \hat x] = 1.$$
+Используя значение этого коммутатора, найдем собственное значение гамильтониана, соответствующее вектору
+$\hat a_{+} \ket {E}:$
+\begin{equation}
+\begin{aligned}
+ \hat H \hat a_{+} \ket{E} &=
+ \hbar\omega\left(\hat a_{+} \hat a_{-} + \frac 1 2\right) \hat a_{+} \ket{E} =\\
+ &= \hbar\omega \left[\hat a_{+} \left(\hat a_{+} \hat a_{-} + [\hat a_{-}, \hat a_{+}]\right)
+    + \frac 1 2 \hat a_{+}\right] \ket{E} =\\
+ &= \hat a_{+} \left[\hbar\omega \left(\hat a_{+} \hat a_{-} + \frac 1 2\right) + \hbar \omega\right] \ket{E} =\\
+ &= \hat a_{+} \left(\hat H + \hbar \omega\right) \ket{E} =\\
+ &= \hat a_{+} \left(E + \hbar \omega\right) \ket{E} =\\
+ &= (E + \hbar\omega) \hat a_{+} \ket{E}.
+\end{aligned}
+\end{equation}
+
+Аналогично можно показать, что вектору $\hat a_{-} E$ соответствует собственное значение $E - \hbar \omega.$
+
+Таким образом, операторы $\hat a_{+}$ и $\hat a_{-}$ повышают и понижают соответственно
+энергию состояния с заданной энергией на величину $\hbar \omega.$ Говорят, что они \textit{рождают}
+и \textit{уничтожают} кванты энергии, откуда и появилось название этих операторов.
+
+\end{document}
