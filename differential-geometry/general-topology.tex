@@ -1,0 +1,56 @@
+% Copyright (C) 2023 Alexander Rodin
+
+\documentclass[b5paper]{book}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[russian]{babel}
+\usepackage{opensans}
+\usepackage[most]{tcolorbox}
+\usepackage{titlesec}
+\usepackage{indentfirst}
+\usepackage{makeidx}
+\usepackage[inline]{enumitem}
+\usepackage{textcomp}
+
+\titleformat{\subsection}
+  {\normalfont\fontsize{10}{15}\bfseries}{\thesection}{1em}{}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Определение}
+\let\oldemptyset\emptyset
+\let\emptyset\varnothing
+
+\binoppenalty=10000
+\relpenalty=10000
+
+\makeindex
+
+\begin{document}
+
+\section* {Общая топология}
+
+\subsubsection*{Топологические пространства}
+
+\begin{definition}
+ Пусть $X$ -- множество, а $\tau$ -- некоторое множество подмножеств $X.$ Тогда пару
+ $(X, \tau)$ называют \index{Топологическое пространство} \emph{топологическим пространством}, если: 1\textdegree)
+ \begin{enumerate}[label={\arabic*\textdegree.}] % [label=\arabic*\textdegree]
+  \item $X\in \tau,$ $\emptyset \in \tau;$
+  \item для всякого (конечного или бесконечного) набора множеств
+  $\{U_\alpha \in \tau: \alpha \in A\},$ где $A$ -- некоторое множество индексов,
+  их объединение принадлежит $\tau:$ $\bigcup\limits_{\alpha \in A} U_\alpha \in \tau;$
+  \item для всякого конечного набора открытых множеств
+  $\{U_\alpha\in\tau: \alpha = 1, \dots , N\}$ их пересечение принадлежит $\tau:$
+  $\bigcap\limits_{\alpha=1}^{N} U_\alpha \in \tau.$
+ \end{enumerate}
+\end{definition}
+
+
+% \begin{definition}
+%
+% \end{definition}
+
+\printindex
+
+\end{document}
