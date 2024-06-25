@@ -7,7 +7,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath,amssymb}
 \usepackage[russian]{babel}
-\usepackage{opensans}
+% \usepackage{opensans}
 \usepackage[most]{tcolorbox}
 \usepackage{titlesec}
 \usepackage{indentfirst}
@@ -154,5 +154,21 @@ $\hat a_{+} \ket {E}:$
 Таким образом, операторы $\hat a_{+}$ и $\hat a_{-}$ повышают и понижают соответственно
 энергию состояния с заданной энергией на величину $\hbar \omega.$ Говорят, что они \textit{рождают}
 и \textit{уничтожают} кванты энергии, откуда и появилось название этих операторов.
+
+\subsubsection*{Собственные функции}
+
+Собственные функции оператора $\hat H$ можно найти, действуя многократно оператором рождения на низшее
+энергетическое состояние с волновой функций $\psi_0(x).$
+
+В координатном представлении $\hat a_+^n \ket{0}$ будет иметь вид
+
+\begin{equation}
+\begin{aligned}
+\psi_n(x) &= \left(\sqrt{\frac{m\omega}{\hbar}} x - \frac{\hbar}{\sqrt{2m\hbar\omega}}\frac{d}{dx}\right)^n \left(\frac{m\omega}{\pi\hbar}\right)^{\frac 1 4}
+e^{-\frac{m\omega}{2\hbar}x^2} = \\
+&= \frac 1 2 \left(2 \sqrt{\frac{m\omega}{2\hbar}} x - \frac{d}{d\left(\sqrt{\frac{m\omega}{2\hbar}}x\right)}\right)^n \left(\frac{m\omega}{\pi\hbar}\right)^{\frac 1 4}
+e^{-\left(\sqrt{\frac{m\omega}{2\hbar}} x\right)^2}.
+\end{aligned}
+\end{equation}
 
 \end{document}
