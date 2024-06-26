@@ -1,0 +1,106 @@
+% Copyright (C) 2023 Alexander Rodin
+% Licensed under Creative Commons Attribution 4.0 International Public License
+% which is available at https://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+\documentclass[b5paper]{book}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb}
+\usepackage[russian]{babel}
+% \usepackage{opensans}
+\usepackage[most]{tcolorbox}
+\usepackage{titlesec}
+\usepackage{indentfirst}
+
+\titleformat{\subsection}
+  {\normalfont\fontsize{10}{15}\bfseries}{\thesection}{1em}{}
+
+\usepackage{mathtools}
+\DeclarePairedDelimiter\bra{\langle}{\rvert}
+\DeclarePairedDelimiter\ket{\lvert}{\rangle}
+\DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{#1 \delimsize\vert #2}
+
+\binoppenalty=10000
+\relpenalty=10000
+
+\definecolor{mathadd-bg}{RGB}{255, 241, 224}
+% \definecolor{mathadd-bg}{RGB}{255, 232, 224}
+\definecolor{mathadd-fg}{RGB}{173, 54, 33}
+\newtcolorbox{mathadd}[2][]{%
+    colback=mathadd-bg,
+    grow to right by=-0.5mm,
+    grow to left by=-0.50mm,
+    boxrule=0pt,
+    boxsep=0pt,
+    breakable,
+    enhanced jigsaw,
+    borderline west={4pt}{0pt}{mathadd-fg},
+%     title={#2\par},
+    colbacktitle={mathadd-bg},
+    coltitle={black},
+    fonttitle={\large\bfseries},
+    attach title to upper={},
+    before upper={\parindent4pt},
+    #1,
+}
+
+\begin{document}
+
+\section*{Атом водорода}
+
+Рассмотрим систему из двух заряженных частиц: протона и электрона. Такая система называется атомом водорода.
+Классический гамильтониан для такой системы будет иметь вид
+
+$$
+H = \frac{p_e^2}{2m_e} + \frac{p_p^2}{2m_p} + \frac{e^2}{|r_e - r_p|}.
+$$
+
+Будем считать, что $m_e \ll m_p,$ тогда можно считать протон неподвижным и рассматривать только движение электрона. В таком случае
+гамильтониан принимает вид
+
+$$
+H = \frac{p^2}{2m} + \frac{e^2}{r}.
+$$
+
+Будем рассматривать систему в сферических координатах, где
+
+\begin{equation*}
+\begin{aligned}
+x &= r \sin \theta \cos \phi, \\
+y &= r \sin \theta \sin \phi, \\
+z &= r \cos \phi,
+\end{aligned}
+\end{equation*}
+
+Тогда оператор импульса $\hat p,$ который при квантовании переходит в $-i\hbar \nabla,$ выразится как
+
+$$
+\hat p = -i\hbar \left({\mathbf e}_r\frac{\partial}{\partial r} + {\mathbf e}_{\theta} \frac 1 r \frac {\partial}{\partial \theta} + 
+{\mathbf e}_{\phi}\frac{1}{r\sin\theta} \frac{\partial}{\partial \varphi}.
+ \right)
+$$
+
+Таким образом, квантовомеханический гамильтониан в координатном представлении имеет вид
+
+\begin{equation*}
+\begin{aligned}
+\hat H  &= \frac{\hat p^2}{2m} + \frac{e^2}{r} = \\
+&= \frac{1}{2m} \left[\frac{1}{r^2}\frac{\partial}{\partial r}\left(r^2 \frac {\partial}{\partial r}\right)
+ + \frac{1}{r^2 \sin\theta}\frac{\partial}{\partial \theta}
+\left(\sin \theta \frac{\partial}{\partial \theta}\right)
++ \frac{1}{r^2\sin^2 \theta}\frac{\partial^2}{\partial \varphi^2}
+\right] + \frac{e^2}{r}.
+\end{aligned}
+\end{equation*}
+
+Соответствующее этому гамильтониану стационарное уравнение Шрёдингера:
+
+\begin{equation}
+\frac{1}{2m} \left[\frac{1}{r^2}\frac{\partial}{\partial r}\left(r^2 \frac {\partial\psi}{\partial r}\right)
+ + \frac{1}{r^2 \sin\theta}\frac{\partial\psi}{\partial \theta}
+\left(\sin \theta \frac{\partial}{\partial \theta}\right)
++ \frac{1}{r^2\sin^2 \theta}\frac{\partial^2 \psi}{\partial \varphi^2}
+\right] + \frac{e^2}{r} \psi = E\psi.
+\end{equation}
+
+\end{document}
